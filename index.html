@@ -41,23 +41,10 @@
   ::selection{background:var(--amber); color:#0C1220;}
   :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
 
-  /* NAV */
-  header.site{
-    position:sticky; top:0; z-index:50;
-    background:rgba(12,18,32,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-  }
-  nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--max-w); margin:0 auto;}
-  .brand{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16px;}
-  .brand .dot{color:var(--teal);}
-  nav ul{list-style:none; display:flex; gap:28px; margin:0; padding:0;}
-  nav a{text-decoration:none; color:var(--text-dim); font-size:14px; font-family:'IBM Plex Mono', monospace; transition:color .15s ease;}
-  nav a:hover{color:var(--text);}
-  .nav-toggle{display:none;}
-
   /* HERO */
-  .hero{padding:88px 0 64px;}
+  .hero{padding:72px 0 64px;}
+  .brand-mark{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16px; margin-bottom:28px; display:flex; align-items:center; gap:8px;}
+  .brand-mark .dot{color:var(--teal);}
   .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
@@ -69,7 +56,11 @@
   .hero h1{font-size:clamp(32px, 4.4vw, 52px); font-weight:600; line-height:1.08;}
   .hero h1 .accent{color:var(--amber);}
   .hero p.lead{color:var(--text-dim); font-size:17px; max-width:46ch; margin-top:18px;}
-  .cta-row{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .stat-strip-inline{display:flex; gap:28px; margin-top:36px; flex-wrap:wrap;}
+  .stat-strip-inline .stat{border:none; background:none; padding:0;}
+  .stat-strip-inline .num{font-size:24px;}
+  .stat-strip-inline .desc{margin-top:4px;}
+
   .btn{
     font-family:'IBM Plex Mono', monospace; font-size:13.5px; text-decoration:none;
     padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; gap:8px;
@@ -80,37 +71,31 @@
   .btn-ghost{border:1px solid var(--border); color:var(--text);}
   .btn-ghost:hover{border-color:var(--teal); transform:translateY(-2px);}
 
-  /* DASHBOARD PANEL (signature element) */
-  .panel{
+  /* SCREENSHOT FRAME (signature element — holds real dashboard images) */
+  .shot-frame{
+    margin:0;
     background:linear-gradient(180deg, var(--panel), var(--panel-2));
     border:1px solid var(--border);
     border-radius:14px;
-    padding:20px;
+    padding:16px;
     box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
   }
-  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
   .panel-head .dots{display:flex; gap:6px;}
   .panel-head .dots span{width:8px; height:8px; border-radius:50%; background:var(--border);}
   .panel-head .label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-dim);}
-  .kpi-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;}
-  .kpi{
-    background:rgba(255,255,255,0.02);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:14px 14px 12px;
+  .shot-placeholder{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+    border:1.5px dashed var(--border); border-radius:10px;
+    padding:48px 20px;
+    color:var(--text-dim);
+    background:rgba(255,255,255,0.015);
   }
-  .kpi .kpi-label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em;}
-  .kpi .kpi-value{font-family:'Space Grotesk', sans-serif; font-size:26px; font-weight:600; margin-top:6px; color:var(--text);}
-  .kpi .kpi-value.up{color:var(--teal);}
-  .kpi .kpi-value.warm{color:var(--amber);}
-  .chart-card{
-    background:rgba(255,255,255,0.02);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:14px;
-  }
-  .chart-card .kpi-label{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px; display:block;}
-  .sparkline{width:100%; height:64px; display:block;}
+  .shot-frame--hero .shot-placeholder{min-height:220px;}
+  .shot-placeholder svg{color:var(--teal); opacity:0.7;}
+  .shot-placeholder p{font-family:'IBM Plex Mono', monospace; font-size:12.5px; text-align:center; margin:0; max-width:24ch;}
+  .shot-img{width:100%; display:block; border-radius:10px;}
+  .shot-frame figcaption{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--text-dim); margin-top:12px; text-align:center;}
 
   /* SECTION SHELL */
   section{padding:72px 0; border-top:1px solid var(--border);}
@@ -147,11 +132,11 @@
   .project-card .stage{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber); margin-bottom:10px; display:block;}
   .project-card h3{font-size:18px; margin-bottom:8px;}
   .project-card p{color:var(--text-dim); font-size:14px; margin:0 0 14px;}
-  .stack-row{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;}
   .stack-row span{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--teal); background:rgba(79,209,197,0.08); border:1px solid rgba(79,209,197,0.2); padding:3px 8px; border-radius:100px;}
-  .proj-links{display:flex; gap:14px;}
-  .proj-links a{font-family:'IBM Plex Mono', monospace; font-size:12.5px; text-decoration:none; color:var(--text-dim); border-bottom:1px dashed var(--border); padding-bottom:2px;}
-  .proj-links a:hover{color:var(--teal); border-color:var(--teal);}
+  .project-card .shot-frame{padding:10px; margin-bottom:16px;}
+  .project-card .shot-placeholder{padding:32px 16px;}
+  .project-card .shot-placeholder svg{width:28px; height:28px;}
 
   /* CONTACT */
   .contact-panel{
@@ -166,12 +151,12 @@
   footer{padding:32px 0; text-align:center; color:var(--text-dim); font-family:'IBM Plex Mono', monospace; font-size:12px; border-top:1px solid var(--border);}
 
   @media (max-width:860px){
-    nav ul{display:none;}
     .hero-grid{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr; gap:32px;}
     .skill-groups{grid-template-columns:1fr;}
     .project-grid{grid-template-columns:1fr;}
     .stat-strip{grid-template-columns:1fr;}
+    .stat-strip-inline{gap:20px;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -181,62 +166,36 @@
 </head>
 <body>
 
-<header class="site">
-  <nav>
-    <div class="brand">Sreelakshmi<span class="dot">.</span></div>
-    <ul>
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </nav>
-</header>
-
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
+      <div class="brand-mark">Sreelakshmi<span class="dot">.</span></div>
       <span class="eyebrow">available for opportunities</span>
       <h1>Data Analyst turning<br>raw data into <span class="accent">decisions</span>.</h1>
       <p class="lead">I build BI dashboards, data pipelines, and automation that help teams trust their numbers — and act on them faster.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#projects">View projects →</a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      <div class="stat-strip-inline">
+        <div class="stat"><div class="num">100+</div><div class="desc">dashboards shipped</div></div>
+        <div class="stat"><div class="num">40%</div><div class="desc">faster retrieval</div></div>
+        <div class="stat"><div class="num">3+ yrs</div><div class="desc">in analytics</div></div>
       </div>
     </div>
 
-    <div class="panel" role="img" aria-label="Illustrative dashboard showing sample impact metrics">
+    <!-- Replace this frame with a real screenshot: <img src="images/flagship-dashboard.png" alt="Screenshot of my flagship Power BI dashboard" class="shot-img"> -->
+    <figure class="shot-frame shot-frame--hero">
       <div class="panel-head">
-        <span class="label">// impact_overview.pbix</span>
+        <span class="label">// flagship_dashboard.png</span>
         <div class="dots"><span></span><span></span><span></span></div>
       </div>
-      <div class="kpi-grid">
-        <div class="kpi">
-          <div class="kpi-label">Data accuracy</div>
-          <div class="kpi-value up">+30%</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">Processing efficiency</div>
-          <div class="kpi-value up">+25%</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">Retrieval speed</div>
-          <div class="kpi-value warm">+40%</div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">Manual hours saved</div>
-          <div class="kpi-value warm">15/wk</div>
-        </div>
-      </div>
-      <div class="chart-card">
-        <span class="kpi-label">Dashboard refresh reliability</span>
-        <svg class="sparkline" viewBox="0 0 300 64" preserveAspectRatio="none">
-          <polyline fill="none" stroke="#243050" stroke-width="1" points="0,50 300,50"></polyline>
-          <polyline id="spark" fill="none" stroke="#4FD1C5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            points="0,46 30,42 60,44 90,34 120,36 150,24 180,26 210,16 240,18 270,10 300,12"></polyline>
+      <div class="shot-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+          <path d="M3 15l5-4 4 3 5-6 4 4"></path>
+          <circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"></circle>
         </svg>
+        <p>Drop in a screenshot of your flagship dashboard here</p>
       </div>
-    </div>
+      <figcaption>A dashboard I built at work — swap this image for the real thing</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -305,55 +264,77 @@
   <div class="wrap">
     <span class="tag">// projects</span>
     <h2 class="sec-title">Featured work</h2>
-    <p style="color:var(--text-dim); font-size:14px; margin-top:-24px; margin-bottom:32px;">Placeholders below — swap in your real repo links, screenshots, and write-ups.</p>
+    <p style="color:var(--text-dim); font-size:14px; margin-top:-24px; margin-bottom:32px;">A selection of dashboards, tools, and designs I've built.</p>
     <div class="project-grid">
 
       <div class="project-card">
-        <span class="stage">bronze → silver → gold</span>
-        <h3>Medallion Lakehouse Architecture</h3>
-        <p>Designed a layered lakehouse to structure raw-to-refined data flow, cutting data retrieval time and storage footprint significantly.</p>
-        <div class="stack-row"><span>Microsoft Fabric</span><span>PySpark</span><span>Delta Lake</span></div>
-        <div class="proj-links"><a href="#">Repo →</a><a href="#">Diagram →</a></div>
+        <figure class="shot-frame">
+          <img src="images/gdc-issues-insight-dashboard.png" alt="GDC Issues Insight Dashboard showing global issue counts by country, priority gauges, and an interactive world map" class="shot-img">
+        </figure>
+        <span class="stage">global rollup</span>
+        <h3>GDC Issues Insight Dashboard</h3>
+        <p>A global-scale rollup tracking commissioning issues across 180+ projects and 71K+ pieces of equipment, with an interactive map, SLA breakdowns, and priority gauges by region.</p>
+        <div class="stack-row"><span>Power BI</span><span>Geo-mapping</span><span>DAX</span></div>
       </div>
 
       <div class="project-card">
+        <figure class="shot-frame">
+          <img src="images/issues-tracker-dashboard.png" alt="CX and DCOS issues tracker dashboard showing issues by discipline, equipment type, responsibility, and time to close" class="shot-img">
+        </figure>
         <span class="stage">dashboard suite</span>
-        <h3>Enterprise Power BI Dashboards</h3>
-        <p>Built region-specific dashboards for a multi-region client, giving stakeholders real-time visibility into operations and risk.</p>
-        <div class="stack-row"><span>Power BI</span><span>DAX</span><span>Fabric</span></div>
-        <div class="proj-links"><a href="#">Repo →</a><a href="#">Screenshots →</a></div>
+        <h3>CX/DCOS Issues Tracker</h3>
+        <p>Operational dashboard breaking down open vs. closed issues by discipline, equipment type, and responsible party, with time-to-close trend analysis across project phases.</p>
+        <div class="stack-row"><span>Power BI</span><span>DAX</span><span>Data Modeling</span></div>
       </div>
 
       <div class="project-card">
+        <figure class="shot-frame">
+          <img src="images/checklist-functional-test-dashboard.png" alt="Checklist and functional test status dashboard with tag-based tracking by equipment type" class="shot-img">
+        </figure>
+        <span class="stage">QA tracking</span>
+        <h3>Checklist & Functional Test Status</h3>
+        <p>Tracks commissioning checklist completion and functional test sign-off across thousands of assets, using a color-tag system (Black/Red/Yellow/Green/Blue) to flag status at a glance.</p>
+        <div class="stack-row"><span>Power BI</span><span>Data Quality</span></div>
+      </div>
+
+      <div class="project-card">
+        <figure class="shot-frame">
+          <img src="images/missing-manufacturer-tracker.png" alt="Missing Manufacturer Tracker dashboard with fill-rate trends and daily progress" class="shot-img">
+        </figure>
         <span class="stage">automation</span>
-        <h3>ETL/ELT Pipeline Engine</h3>
-        <p>Pipelines pulling from REST APIs and flat files into standardized semantic models, replacing manual ingestion.</p>
-        <div class="stack-row"><span>Python</span><span>REST APIs</span><span>PySpark</span></div>
-        <div class="proj-links"><a href="#">Repo →</a></div>
+        <h3>Missing Manufacturer Tracker</h3>
+        <p>Tracks data-completeness gaps across 28K+ equipment records, monitoring fill-rate progress over time and surfacing which projects need attention.</p>
+        <div class="stack-row"><span>Power BI</span><span>Data Validation</span><span>Python</span></div>
       </div>
 
       <div class="project-card">
-        <span class="stage">investigation</span>
-        <h3>Root Cause & Accountability Analysis</h3>
-        <p>An analysis framework linking recurring failures to specific sources, enabling decisions based on quantified performance.</p>
-        <div class="stack-row"><span>Python</span><span>SQL</span><span>Power BI</span></div>
-        <div class="proj-links"><a href="#">Repo →</a><a href="#">Case study →</a></div>
+        <figure class="shot-frame">
+          <img src="images/custom-gauge-visual.png" alt="Custom-built Power BI gauge visual showing issue priority breakdowns, developed with pbiviz" class="shot-img">
+        </figure>
+        <span class="stage">custom dev</span>
+        <h3>Custom Power BI Visual (pbiviz)</h3>
+        <p>Designed and built a custom priority-gauge visual from scratch using the Power BI Visuals SDK (pbiviz), used across multiple dashboards for a consistent, at-a-glance priority view.</p>
+        <div class="stack-row"><span>pbiviz</span><span>Custom Visuals SDK</span></div>
       </div>
 
       <div class="project-card">
-        <span class="stage">extraction</span>
-        <h3>Web Scraping Toolkit</h3>
-        <p>Scraping tools to extract and structure data from web sources for downstream analysis and reporting.</p>
-        <div class="stack-row"><span>Python</span><span>Scrapy</span><span>Playwright</span></div>
-        <div class="proj-links"><a href="#">Repo →</a></div>
+        <figure class="shot-frame">
+          <img src="images/sharepoint-portal-design.png" alt="SharePoint dashboard portal design with a navigation hub linking to regional dashboards" class="shot-img">
+        </figure>
+        <span class="stage">portal design</span>
+        <h3>SharePoint Dashboard Portal</h3>
+        <p>Designed a navigation hub in SharePoint linking regional dashboards (AMER, APAC, N-EMEA, S-EMEA) into a single, easy-to-browse portal for cross-tenant reporting access.</p>
+        <div class="stack-row"><span>SharePoint</span><span>Power BI Embed</span><span>UX Design</span></div>
       </div>
 
       <div class="project-card">
-        <span class="stage">automation</span>
-        <h3>Reporting Automation Suite</h3>
-        <p>Automated spreadsheet creation and distribution, cutting manual reporting time and reducing human error.</p>
-        <div class="stack-row"><span>Python</span><span>Pandas</span></div>
-        <div class="proj-links"><a href="#">Repo →</a></div>
+        <figure class="shot-frame">
+          <img src="images/star-schema-model.png" alt="Power BI star schema data model showing fact and dimension table relationships" class="shot-img">
+        </figure>
+        <span class="stage">data modeling</span>
+        <h3>Star Schema Data Model</h3>
+        <p>Modeled fact and dimension tables (equipment, projects, dates, manufacturer snapshots) into a clean star schema for fast, reliable Power BI reporting.</p>
+        <div class="stack-row"><span>Power BI</span><span>Data Modeling</span></div>
       </div>
 
     </div>
